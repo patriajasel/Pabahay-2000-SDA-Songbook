@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:church_songbook_app/features/home/home_page.dart';
 import 'package:church_songbook_app/shared/common/custom_title_bar.dart';
 import 'package:church_songbook_app/shared/theme/app_theme_config.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +13,23 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Timer(const Duration(milliseconds: 5000), () {
+        if (context.mounted) {
+          Navigator.pushReplacement(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, _) => const HomePage(),
+              transitionDuration: const Duration(milliseconds: 600),
+              transitionsBuilder: (context, animation, _, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            ),
+          );
+        }
+      });
+    });
+
     return Scaffold(
       body: Stack(
         children: [
