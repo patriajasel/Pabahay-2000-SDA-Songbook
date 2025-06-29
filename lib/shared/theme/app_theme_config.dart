@@ -17,10 +17,26 @@ class AppThemeConfig {
         color: AppColors.gold,
       ),
       bodyMedium: GoogleFonts.lora(fontSize: 24.sp, color: AppColors.ivory),
+      bodySmall: GoogleFonts.lora(fontSize: 18.sp, color: AppColors.ivory),
     ),
 
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(iconColor: WidgetStatePropertyAll(AppColors.ivory)),
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(AppColors.ivory),
+        foregroundColor: WidgetStatePropertyAll(AppColors.darkRed),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: 60.w, vertical: 25.h),
+        ),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(15.r),
+          ),
+        ),
+      ),
     ),
 
     extensions: [
@@ -39,15 +55,28 @@ class AppThemeConfig {
         fontWeight: FontWeight.bold,
         color: AppColors.cream,
       ),
-      bodyMedium: GoogleFonts.lora(
-        fontSize: 24.sp,
-        color: AppColors.emeraldGreen,
-      ),
+      bodyMedium: GoogleFonts.lora(fontSize: 24.sp, color: AppColors.warmBeige),
+      bodySmall: GoogleFonts.lora(fontSize: 18.sp, color: AppColors.warmBeige),
     ),
 
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        iconColor: WidgetStatePropertyAll(AppColors.emeraldGreen),
+        iconColor: WidgetStatePropertyAll(AppColors.warmBeige),
+      ),
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(AppColors.warmBeige),
+        foregroundColor: WidgetStatePropertyAll(AppColors.darkBlue),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: 60.w, vertical: 25.h),
+        ),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(15.r),
+          ),
+        ),
       ),
     ),
 
@@ -68,11 +97,27 @@ class AppThemeConfig {
         color: AppColors.goldenYellow,
       ),
       bodyMedium: GoogleFonts.lora(fontSize: 24.sp, color: AppColors.deepBrown),
+      bodySmall: GoogleFonts.lora(fontSize: 18.sp, color: AppColors.deepBrown),
     ),
 
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         iconColor: WidgetStatePropertyAll(AppColors.deepBrown),
+      ),
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(AppColors.deepBrown),
+        foregroundColor: WidgetStatePropertyAll(AppColors.goldenYellow),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: 60.w, vertical: 25.h),
+        ),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(15.r),
+          ),
+        ),
       ),
     ),
 
@@ -88,6 +133,7 @@ extension TextThemeExtension on BuildContext {
 
   TextStyle? get titleLarge => textTheme.titleLarge;
   TextStyle? get bodyMedium => textTheme.bodyMedium;
+  TextStyle? get bodySmall => textTheme.bodySmall;
 }
 
 /// Extensions Here!
@@ -206,12 +252,12 @@ class WindowButtonTheme extends ThemeExtension<WindowButtonTheme> {
   static WindowButtonTheme get blueCyanTheme => WindowButtonTheme(
     minimizeColors: WindowButtonColors(
       iconNormal: AppColors.cream,
-      iconMouseOver: AppColors.emeraldGreen,
+      iconMouseOver: AppColors.warmBeige,
       mouseOver: AppColors.softCyan,
     ),
     maximizeColors: WindowButtonColors(
       iconNormal: AppColors.cream,
-      iconMouseOver: AppColors.emeraldGreen,
+      iconMouseOver: AppColors.warmBeige,
       mouseOver: AppColors.softCyan,
     ),
     closeColors: WindowButtonColors(

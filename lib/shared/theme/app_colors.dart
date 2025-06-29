@@ -19,7 +19,7 @@ class AppColors {
   static Color get darkBlue => Color(0xFF210cae);
   static Color get softCyan => Color(0xFF4dc9e6);
   static Color get cream => Color(0xFFFDFBD4);
-  static Color get emeraldGreen => Color(0xFF00674F);
+  static Color get warmBeige => Color(0xFFf4e2d8);
 
   // Blue/Cyan Gradient Colors
   static Gradient blueCyanGradient = LinearGradient(
