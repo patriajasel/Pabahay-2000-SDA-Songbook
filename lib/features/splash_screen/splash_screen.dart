@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:church_songbook_app/features/home/home_page.dart';
-import 'package:church_songbook_app/shared/common/custom_title_bar.dart';
+import 'package:church_songbook_app/shared/common/app_layout_wrapper.dart';
 import 'package:church_songbook_app/shared/theme/app_theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -30,54 +29,32 @@ class SplashScreen extends StatelessWidget {
       });
     });
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Background gradient that covers entire screen
-          _buildGradientBackground(context),
-
-          // Vignette effect using a radial gradient
-          _buildVignetteEffect(),
-
-          // Column with title bar and content
-          _buildMainContent(context),
-
-          _buildSettings(context),
-        ],
-      ),
+    return AppLayoutWrapper(
+      onSettingsPressed: () {
+        // Handle settings navigation
+      },
+      child: _buildMainContent(context),
     );
   }
 
   Widget _buildMainContent(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Custom Title Bar
-        const CustomTitleBar(),
-
-        // App Title and Logo
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildAnimatedLogo().logoSplashAnimate(),
-
-                  SizedBox(width: 16.w),
-                  // Animated typewriter text that starts after logo moves
-                  _buildAnimatedTitle(),
-                ],
-              ),
-
-              SizedBox(height: 20.h),
-
-              _buildLoadingText(
-                context,
-              ).animate(delay: 3000.ms).fadeIn(duration: 500.ms),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildAnimatedLogo().logoSplashAnimate(),
+            SizedBox(width: 16.w),
+            _buildAnimatedTitle(),
+          ],
         ),
+
+        SizedBox(height: 20.h),
+
+        _buildLoadingText(
+          context,
+        ).animate(delay: 3000.ms).fadeIn(duration: 500.ms),
       ],
     );
   }
@@ -119,11 +96,7 @@ class SplashScreen extends StatelessWidget {
                 displayFullTextOnTap: false,
               );
             } else {
-              // Empty container while waiting
-              return SizedBox(
-                width: 200.w, // Maintain space
-                height: 100.h,
-              );
+              return SizedBox(width: 200.w, height: 100.h);
             }
           },
         );
@@ -149,35 +122,6 @@ class SplashScreen extends StatelessWidget {
           pause: Duration(milliseconds: 200),
         ),
       ],
-    );
-  }
-
-  Widget _buildVignetteEffect() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: RadialGradient(
-          center: Alignment.center,
-          radius: 1.2,
-          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.5)],
-          stops: [0.7, 1.0],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGradientBackground(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: context.gradientTheme.primaryGradient,
-      ),
-    );
-  }
-
-  Widget _buildSettings(BuildContext context) {
-    return Positioned(
-      bottom: 5,
-      right: 5,
-      child: IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
     );
   }
 }

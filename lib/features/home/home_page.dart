@@ -1,4 +1,8 @@
-import 'package:church_songbook_app/shared/common/custom_title_bar.dart';
+import 'package:church_songbook_app/features/home/pages/hymnal/hymnal.dart';
+import 'package:church_songbook_app/features/home/pages/response_hymns/response_hymns.dart';
+import 'package:church_songbook_app/features/home/pages/song_editor/song_editor.dart';
+import 'package:church_songbook_app/features/home/pages/special_songs/special_songs.dart';
+import 'package:church_songbook_app/shared/common/app_layout_wrapper.dart';
 import 'package:church_songbook_app/shared/common/glass_box.dart';
 import 'package:church_songbook_app/shared/theme/app_theme_config.dart';
 import 'package:flutter/material.dart';
@@ -9,56 +13,36 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Background gradient that covers entire screen
-          _buildGradientBackground(context),
-
-          // Vignette effect using a radial gradient
-          _buildVignetteEffect(),
-
-          _buildMainContent(context),
-
-          _buildSettings(context),
-        ],
-      ),
+    return AppLayoutWrapper(
+      onSettingsPressed: () {
+        // Handle settings navigation
+      },
+      child: _buildMainContent(context),
     );
   }
 
   Widget _buildMainContent(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        // Custom Title Bar
-        const CustomTitleBar(),
+        SizedBox(height: 20.h),
 
-        // App Title and Logo
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 20.h),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildLogo(),
-
-                  SizedBox(width: 16.w),
-                  _buildTitle(context),
-                ],
-              ),
-
-              SizedBox(height: 100.h),
-
-              _buildSongbookFeatures(context),
-
-              SizedBox(height: 100.h),
-
-              _buildEditorButton(),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildLogo(),
+            SizedBox(width: 16.w),
+            _buildTitle(context),
+          ],
         ),
+
+        SizedBox(height: 100.h),
+
+        _buildSongbookFeatures(context),
+
+        SizedBox(height: 100.h),
+
+        _buildEditorButton(context),
       ],
     );
   }
@@ -71,21 +55,28 @@ class HomePage extends StatelessWidget {
           context,
           featureName: 'Hymnal',
           assetUrl: 'lib/shared/assets/hymnal_logo.png',
-          onPressed: () {},
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Hymnal()),
+          ),
         ),
-
         _buildFeatureButton(
           context,
           featureName: 'Response Hymns',
           assetUrl: 'lib/shared/assets/response_hymns_logo.png',
-          onPressed: () {},
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ResponseHymns()),
+          ),
         ),
-
         _buildFeatureButton(
           context,
           featureName: 'Special Songs',
           assetUrl: 'lib/shared/assets/special_songs_logo.png',
-          onPressed: () {},
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => SpecialSongs()),
+          ),
         ),
       ],
     );
@@ -112,9 +103,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildEditorButton() {
+  Widget _buildEditorButton(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () {},
+      onPressed: () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => SongEditor()),
+      ),
       icon: Icon(Icons.music_note),
       label: Text('Open Editor'),
     );
@@ -141,35 +135,6 @@ class HomePage extends StatelessWidget {
         ],
       ),
       textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _buildGradientBackground(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: context.gradientTheme.primaryGradient,
-      ),
-    );
-  }
-
-  Widget _buildVignetteEffect() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: RadialGradient(
-          center: Alignment.center,
-          radius: 1.2,
-          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.5)],
-          stops: [0.7, 1.0],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSettings(BuildContext context) {
-    return Positioned(
-      bottom: 5,
-      right: 5,
-      child: IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
     );
   }
 }
