@@ -1,4 +1,5 @@
 import 'package:church_songbook_app/shared/common/custom_title_bar.dart';
+import 'package:church_songbook_app/shared/common/side_bar_navigation.dart';
 import 'package:church_songbook_app/shared/theme/app_theme_config.dart';
 import 'package:flutter/material.dart';
 
@@ -6,14 +7,20 @@ class AppLayoutWrapper extends StatelessWidget {
   final Widget child;
   final bool showSettings;
   final VoidCallback? onSettingsPressed;
-  final bool includeTitleBar;
+  final bool includeSideNavigation;
+  final int selectedIndex;
+  final Function(int)? onItemSelected;
+  final VoidCallback? onHomePressed;
 
   const AppLayoutWrapper({
     super.key,
     required this.child,
     this.showSettings = true,
     this.onSettingsPressed,
-    this.includeTitleBar = true,
+    this.includeSideNavigation = false,
+    this.selectedIndex = 0,
+    this.onItemSelected,
+    this.onHomePressed,
   });
 
   @override
@@ -27,8 +34,11 @@ class AppLayoutWrapper extends StatelessWidget {
           // Vignette effect using a radial gradient
           _buildVignetteEffect(),
 
-          // Main content with optional title bar
-          _buildContent(),
+          // Main content
+          if (includeSideNavigation)
+            _buildContentWithSideNav(context)
+          else
+            _buildContent(),
 
           // Settings button (optional)
           if (showSettings) _buildSettings(context),
@@ -38,15 +48,31 @@ class AppLayoutWrapper extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    if (includeTitleBar) {
-      return Column(
-        children: [
-          const CustomTitleBar(),
-          Expanded(child: child),
-        ],
-      );
-    }
-    return child;
+    return Column(
+      children: [
+        const CustomTitleBar(),
+        Expanded(child: child),
+      ],
+    );
+  }
+
+  Widget _buildContentWithSideNav(BuildContext context) {
+    return Column(
+      children: [
+        CustomTitleBar(),
+        Expanded(
+          child: Row(
+            children: [
+              SideBarNavigation(
+                selectedIndex: selectedIndex,
+                onItemSelected: onItemSelected ?? (index) {},
+              ),
+              Expanded(child: child),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildGradientBackground(BuildContext context) {

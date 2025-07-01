@@ -1,24 +1,16 @@
-import 'package:church_songbook_app/features/home/pages/hymnal/hymnal.dart';
-import 'package:church_songbook_app/features/home/pages/response_hymns/response_hymns.dart';
-import 'package:church_songbook_app/features/home/pages/song_editor/song_editor.dart';
-import 'package:church_songbook_app/features/home/pages/special_songs/special_songs.dart';
-import 'package:church_songbook_app/shared/common/app_layout_wrapper.dart';
 import 'package:church_songbook_app/shared/common/glass_box.dart';
 import 'package:church_songbook_app/shared/theme/app_theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final Function(int) onNavigate;
+
+  const HomePage({super.key, required this.onNavigate});
 
   @override
   Widget build(BuildContext context) {
-    return AppLayoutWrapper(
-      onSettingsPressed: () {
-        // Handle settings navigation
-      },
-      child: _buildMainContent(context),
-    );
+    return _buildMainContent(context);
   }
 
   Widget _buildMainContent(BuildContext context) {
@@ -55,28 +47,19 @@ class HomePage extends StatelessWidget {
           context,
           featureName: 'Hymnal',
           assetUrl: 'lib/shared/assets/hymnal_logo.png',
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => Hymnal()),
-          ),
+          onPressed: () => onNavigate(0), // Use callback instead of Navigator
         ),
         _buildFeatureButton(
           context,
           featureName: 'Response Hymns',
           assetUrl: 'lib/shared/assets/response_hymns_logo.png',
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => ResponseHymns()),
-          ),
+          onPressed: () => onNavigate(1), // Use callback instead of Navigator
         ),
         _buildFeatureButton(
           context,
           featureName: 'Special Songs',
           assetUrl: 'lib/shared/assets/special_songs_logo.png',
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => SpecialSongs()),
-          ),
+          onPressed: () => onNavigate(2), // Use callback instead of Navigator
         ),
       ],
     );
@@ -105,10 +88,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildEditorButton(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => SongEditor()),
-      ),
+      onPressed: () => onNavigate(3), // Use callback instead of Navigator
       icon: Icon(Icons.music_note),
       label: Text('Open Editor'),
     );

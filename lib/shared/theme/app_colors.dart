@@ -40,4 +40,9 @@ class AppColors {
     colors: [paleBlue, lightGray],
     stops: [0.0, 0.5],
   );
+
+  // Universal Colors
+  static Color get brightRed => Color(0xFFCD1C18);
+  static Color get green => Color(0xFF008000);
+  static Color get snow => Color(0xFFFFFAFA);
 }
