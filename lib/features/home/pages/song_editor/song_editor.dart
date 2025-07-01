@@ -1,4 +1,3 @@
-import 'package:church_songbook_app/shared/common/app_layout_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class SongEditor extends StatelessWidget {
@@ -6,11 +5,7 @@ class SongEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppLayoutWrapper(
-      showSettings: false,
-      includeTitleBar: true,
-      child: _buildMainContent(),
-    );
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

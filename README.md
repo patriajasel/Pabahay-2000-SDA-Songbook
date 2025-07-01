@@ -18,4 +18,6 @@ samples, guidance on mobile development, and a full API reference.
 =======
 # Pabahay-2000-SDA-Songbook
 This application will be the songbook for Pabahay 2000 SDA Church.
+
+<a href="https://www.flaticon.com/free-icons/choir" title="choir icons">Choir icons created by Freepik - Flaticon</a>
 >>>>>>> dec9b2a44eeec5b7609a262400d0419e5c12b6ea

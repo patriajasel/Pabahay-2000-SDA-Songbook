@@ -1,131 +1,20 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:church_songbook_app/shared/theme/app_colors.dart';
+import 'package:church_songbook_app/shared/theme/color_themes/blue_cyan_theme.dart';
+import 'package:church_songbook_app/shared/theme/color_themes/blue_gray_theme.dart';
+import 'package:church_songbook_app/shared/theme/color_themes/red_teal_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeConfig {
   // Red/Teal Theme
-  static ThemeData get redTealTheme => ThemeData(
-    useMaterial3: true,
-
-    textTheme: GoogleFonts.loraTextTheme().copyWith(
-      titleLarge: GoogleFonts.lora(
-        fontSize: 72.sp,
-        fontWeight: FontWeight.bold,
-        color: AppColors.gold,
-      ),
-      bodyMedium: GoogleFonts.lora(fontSize: 24.sp, color: AppColors.ivory),
-      bodySmall: GoogleFonts.lora(fontSize: 18.sp, color: AppColors.ivory),
-    ),
-
-    iconButtonTheme: IconButtonThemeData(
-      style: ButtonStyle(iconColor: WidgetStatePropertyAll(AppColors.ivory)),
-    ),
-
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(AppColors.ivory),
-        foregroundColor: WidgetStatePropertyAll(AppColors.darkRed),
-        padding: WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 60.w, vertical: 25.h),
-        ),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(15.r),
-          ),
-        ),
-      ),
-    ),
-
-    extensions: [
-      GradientTheme(primaryGradient: AppColors.redTealGradient),
-      WindowButtonTheme.redTealTheme,
-    ],
-  );
+  static ThemeData get redTealTheme => RedTealTheme.redTealTheme;
 
   // Blue/Cyan Theme
-  static ThemeData get blueCyanTheme => ThemeData(
-    useMaterial3: true,
-
-    textTheme: GoogleFonts.loraTextTheme().copyWith(
-      titleLarge: GoogleFonts.lora(
-        fontSize: 72.sp,
-        fontWeight: FontWeight.bold,
-        color: AppColors.cream,
-      ),
-      bodyMedium: GoogleFonts.lora(fontSize: 24.sp, color: AppColors.warmBeige),
-      bodySmall: GoogleFonts.lora(fontSize: 18.sp, color: AppColors.warmBeige),
-    ),
-
-    iconButtonTheme: IconButtonThemeData(
-      style: ButtonStyle(
-        iconColor: WidgetStatePropertyAll(AppColors.warmBeige),
-      ),
-    ),
-
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(AppColors.warmBeige),
-        foregroundColor: WidgetStatePropertyAll(AppColors.darkBlue),
-        padding: WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 60.w, vertical: 25.h),
-        ),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(15.r),
-          ),
-        ),
-      ),
-    ),
-
-    extensions: [
-      GradientTheme(primaryGradient: AppColors.blueCyanGradient),
-      WindowButtonTheme.blueCyanTheme,
-    ],
-  );
+  static ThemeData get blueCyanTheme => BlueCyanTheme.blueCyanTheme;
 
   // Green/Cyan Theme
-  static ThemeData get blueGrayTheme => ThemeData(
-    useMaterial3: true,
-
-    textTheme: GoogleFonts.loraTextTheme().copyWith(
-      titleLarge: GoogleFonts.lora(
-        fontSize: 72.sp,
-        fontWeight: FontWeight.bold,
-        color: AppColors.goldenYellow,
-      ),
-      bodyMedium: GoogleFonts.lora(fontSize: 24.sp, color: AppColors.deepBrown),
-      bodySmall: GoogleFonts.lora(fontSize: 18.sp, color: AppColors.deepBrown),
-    ),
-
-    iconButtonTheme: IconButtonThemeData(
-      style: ButtonStyle(
-        iconColor: WidgetStatePropertyAll(AppColors.deepBrown),
-      ),
-    ),
-
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(AppColors.deepBrown),
-        foregroundColor: WidgetStatePropertyAll(AppColors.goldenYellow),
-        padding: WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 60.w, vertical: 25.h),
-        ),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(15.r),
-          ),
-        ),
-      ),
-    ),
-
-    extensions: [
-      GradientTheme(primaryGradient: AppColors.blueGrayGradient),
-      WindowButtonTheme.blueGrayTheme,
-    ],
-  );
+  static ThemeData get blueGrayTheme => BlueGrayTheme.blueGrayTheme;
 }
 
 extension TextThemeExtension on BuildContext {
@@ -134,6 +23,17 @@ extension TextThemeExtension on BuildContext {
   TextStyle? get titleLarge => textTheme.titleLarge;
   TextStyle? get bodyMedium => textTheme.bodyMedium;
   TextStyle? get bodySmall => textTheme.bodySmall;
+}
+
+extension ColorSchemeExtension on BuildContext {
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
+  Color? get primary => colorScheme.primary;
+  Color? get secondary => colorScheme.secondary;
+  Color? get tertiary => colorScheme.tertiary;
+  Color? get error => colorScheme.error;
+  Color? get surface => colorScheme.surface;
+  Color? get highlight => Theme.of(this).highlightColor;
 }
 
 /// Extensions Here!
@@ -245,7 +145,7 @@ class WindowButtonTheme extends ThemeExtension<WindowButtonTheme> {
     closeColors: WindowButtonColors(
       iconNormal: AppColors.gold,
       iconMouseOver: AppColors.ivory,
-      mouseOver: AppColors.darkRed,
+      mouseOver: AppColors.brightRed,
     ),
   );
 
@@ -263,7 +163,7 @@ class WindowButtonTheme extends ThemeExtension<WindowButtonTheme> {
     closeColors: WindowButtonColors(
       iconNormal: AppColors.cream,
       iconMouseOver: AppColors.cream,
-      mouseOver: AppColors.darkRed,
+      mouseOver: AppColors.brightRed,
     ),
   );
 
@@ -281,7 +181,7 @@ class WindowButtonTheme extends ThemeExtension<WindowButtonTheme> {
     closeColors: WindowButtonColors(
       iconNormal: AppColors.goldenYellow,
       iconMouseOver: AppColors.goldenYellow,
-      mouseOver: AppColors.darkRed,
+      mouseOver: AppColors.brightRed,
     ),
   );
 

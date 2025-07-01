@@ -40,6 +40,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   bitsdojo_window: ^0.1.6
   animated_text_kit: ^4.2.3
+  sidebarx: ^0.17.1
 
 dev_dependencies:
   flutter_test:

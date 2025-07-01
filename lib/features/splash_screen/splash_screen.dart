@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:church_songbook_app/features/home/home_page.dart';
+import 'package:church_songbook_app/shared/router/main_app_navigator.dart';
 import 'package:church_songbook_app/shared/common/app_layout_wrapper.dart';
 import 'package:church_songbook_app/shared/theme/app_theme_config.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class SplashScreen extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             PageRouteBuilder(
-              pageBuilder: (context, animation, _) => const HomePage(),
+              pageBuilder: (context, animation, _) => const MainAppNavigator(),
               transitionDuration: const Duration(milliseconds: 600),
               transitionsBuilder: (context, animation, _, child) {
                 return FadeTransition(opacity: animation, child: child);
