@@ -1,3 +1,4 @@
+import 'package:church_songbook_app/infra/router/app_router.dart';
 import 'package:flutter/material.dart';
 
 class MasterPage extends StatelessWidget {
@@ -5,8 +6,7 @@ class MasterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(body: Center(child: Text('Master Page'))),
-    );
+    final appRouter = AppRouter();
+    return MaterialApp.router(routerConfig: appRouter.appRouter);
   }
 }
