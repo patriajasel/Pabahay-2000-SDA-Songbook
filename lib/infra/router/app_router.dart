@@ -1,7 +1,4 @@
-import 'package:church_songbook_app/modules/home/presentation/components/ay_songs_tab.dart';
-import 'package:church_songbook_app/modules/home/presentation/components/hymnal_tab.dart';
-import 'package:church_songbook_app/modules/home/presentation/components/response_hyms_tab.dart';
-import 'package:church_songbook_app/modules/home/presentation/components/special_songs_tab.dart';
+import 'package:church_songbook_app/modules/home/presentation/components/home_tabs.dart';
 import 'package:church_songbook_app/modules/home/presentation/page/home_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,7 +23,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: '/response',
-                builder: (context, state) => const ResponseTab(),
+                builder: (context, state) => const ResponseHymsTab(),
               ),
             ],
           ),
@@ -34,13 +31,16 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: '/special',
-                builder: (context, state) => const SpecialTab(),
+                builder: (context, state) => const SpecialSongsTab(),
               ),
             ],
           ),
           StatefulShellBranch(
             routes: [
-              GoRoute(path: '/ay', builder: (context, state) => const AYTab()),
+              GoRoute(
+                path: '/ay',
+                builder: (context, state) => const AYSongsTab(),
+              ),
             ],
           ),
         ],
